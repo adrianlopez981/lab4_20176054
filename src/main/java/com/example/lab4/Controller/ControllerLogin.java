@@ -31,7 +31,7 @@ public class ControllerLogin {
 
 
 //            model.addAttribute("listaCategorias",categoryRepository.findAll());
-            return "ingresoExitoso";
+            return "homePage";
         } else {
             return "redirect:/inicio";
         }
@@ -39,9 +39,6 @@ public class ControllerLogin {
 
     }
 
-
-    @GetMapping("ingresoExitoso")
-    public String inicioLogin()
 
 
 

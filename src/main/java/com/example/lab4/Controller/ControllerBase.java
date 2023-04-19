@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class ControllerBase {
 
-    @GetMapping("inicio")
+    @GetMapping("")
     public String vistaInicio() {
         return "inicio";
     }
