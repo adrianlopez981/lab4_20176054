@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<Aerolinea,Integer> {
+public interface UserRepository extends JpaRepository<User,Integer> {
 
-    @Query(value= "select * from user where correo = ?1 and password = ?2",
+    @Query(value= "select * from user where email = ?1 and password = ?2",
             nativeQuery = true)
-    User findByCredentials(String correo, String password);
+    List<User> findByCredentials(String correo, String password);
 
 
 

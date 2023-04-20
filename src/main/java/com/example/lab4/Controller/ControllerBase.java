@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("")
 @Controller
 
 public class ControllerBase {
 
-    @GetMapping("")
+    @GetMapping("/inicio")
     public String vistaInicio() {
         return "inicio";
     }
