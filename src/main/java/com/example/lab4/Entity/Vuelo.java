@@ -16,8 +16,8 @@ public class Vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idvuelo;
-
     private String origen;
+
     private String destino;
     private Date fecha_salida;
 

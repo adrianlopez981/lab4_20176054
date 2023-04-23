@@ -68,30 +68,74 @@
         <div class="card-body">
           <div class="row">
             <div class="col-2"></div>
-            <div class="col-8"><img th:src="@{/images/tokio.jpeg}" class="img-fluid" alt=""></div>
+            <div class="col-8"><img th:src="@{'/images/tokio.jpeg'}" class="img-fluid" alt=""></div>
             <div class="col-2"></div>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-6 mt-2 ml-2 mb-4">
+        <div class="col-sm-6 mt-2 ml-2 mb-4" th:each="vuelo : ${listaVuelos}">
           <div class="card text-center border-white">
             <div class="card-body">
-              <h5 class="card-title mt-3">Lima - Bogota <span class="text-danger"><b>($120.00)</b></span></h5>
-              <p class="text-success"><b>Star Peru - 2I</b> </p>
-              <p>Definitivamente el turismo en Bogotá en más que Monserrate y la Candelaria, hay muchas excursiones por
-                senderos
-                mágicos que puedes realizar. Estas actividades también se conocen como: senderismo, excursionismo,
-                caminata, montañismo,
-                hiking o trekking.</p>
-              <button class="btn btn-success btn-lg btn-block">Comprar</button>
+              <div class="text-center">
+              <div class="row justify-content-center card-title mt-3">
+
+                <div class="col-6 text-end">
+                  <h5
+                          th:text="${#strings.capitalize(vuelo.origen)} + ' - ' +${#strings.capitalize(vuelo.destino)}">
+                  </h5>
+
+                </div>
+                <div class="col-3 text-start">
+                <span class="text-danger">
+                <b th:text="' ($' + ${#numbers.formatDecimal(vuelo.precio,0,'COMMA',2,'POINT')} + ')'">
+                </b>
+                </span>
+                </div>
+
+
+              </div>
+              </div>
+
+              <p class="text-success"><b
+                      th:text="${#strings.capitalizeWords(vuelo.aerolinea.nombre)} + ' - ' + ${vuelo.aerolinea.codigo}"></b>
+              </p>
+              <p th:text="${vuelo.descripcion}"></p>
+              <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Comprar
+              </button>
+              <!--              btn-lg btn-block-->
+              <!--              data-bs-toggle="modal" data-bs-target="#exampleModal"-->
+
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Felicidades</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Se realizó con exito su reserva
+                    </div>
+                    <div class="modal-footer">
+                      <form method="post"
+                            th:action="@{/reserva/nuevaReserva(id_vuelo=${vuelo.idvuelo},precio=${#numbers.formatInteger(vuelo.precio,2)},id_user=${user.iduser})}">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Entiendo</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
